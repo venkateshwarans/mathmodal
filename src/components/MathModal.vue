@@ -8,18 +8,18 @@
                     :scrollable=true
                     :hide-footer=true
                     :hide-header=true
-                    ref="mathModal" 
+                    ref="mathModal"
                     :no-fade=true
                     @shown="handleModalInitialization()">
 
             <slot modal-header>
                 <b-button class="modal-close-btn close" size="sm" @click="closeModal()"><span aria-hidden="true">&times;</span></b-button>
             </slot>
-            
+
             <b-card no-body>
                 <b-tabs justified small card   >
                     <b-tab title="Library" active @click=changeTab>
-                        <div class="item select list-items math-lib" 
+                        <div class="item select list-items math-lib"
                             @click=latexToEquations(item.equation)
                             v-for="item in this.libEquation" :key="item.id"
                             >
@@ -50,7 +50,7 @@
                                     <span class="symbol-div">
                                         <div class="math-symbol" :class="item.class" :id="item.id" @click=latexToEquations(item.symbol) v-html="item.symbolHtml"></div>
                                         <span class="symbol-latex">{{item.symbol.latex}}</span>
-                                    </span> 
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -62,7 +62,7 @@
                                     <span class="symbol-div">
                                         <div class="math-symbol" :class="item.class" :id="item.id" @click=latexToEquations(item.symbol) v-html="item.symbolHtml"></div>
                                         <span class="symbol-latex">{{item.symbol.latex}}</span>
-                                    </span> 
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -73,7 +73,7 @@
                                     <span class="symbol-div">
                                         <div class="math-symbol" :class="item.class" :id="item.id" @click=latexToEquations(item.symbol) v-html="item.symbolHtml"></div>
                                         <span class="symbol-latex">{{item.symbol.latex}}</span>
-                                    </span> 
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -84,7 +84,7 @@
                                     <span class="symbol-div">
                                         <div class="math-symbol" :class="item.class" :id="item.id" @click=latexToEquations(item.symbol) v-html="item.symbolHtml"></div>
                                         <span class="symbol-latex">{{item.symbol.latex}}</span>
-                                    </span> 
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -108,7 +108,7 @@
                                     <span class="symbol-div">
                                         <div class="math-symbol" :class="item.class" :id="item.id" @click=latexToEquations(item.symbol) v-html="item.symbolHtml"></div>
                                         <span class="symbol-latex">{{item.symbol.latex}}</span>
-                                    </span> 
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -119,7 +119,7 @@
                                     <span class="symbol-div">
                                         <div class="math-symbol" :class="item.class" :id="item.id" @click=latexToEquations(item.symbol) v-html="item.symbolHtml"></div>
                                         <span class="symbol-latex">{{item.symbol.latex}}</span>
-                                    </span> 
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -130,7 +130,7 @@
                                     <span class="symbol-div">
                                         <div class="math-symbol" :class="item.class" :id="item.id" @click=latexToEquations(item.symbol) v-html="item.symbolHtml"></div>
                                         <span class="symbol-latex">{{item.symbol.latex}}</span>
-                                    </span> 
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -141,7 +141,7 @@
                                     <span class="symbol-div">
                                         <div class="math-symbol" :class="item.class" :id="item.id" @click=latexToEquations(item.symbol) v-html="item.symbolHtml"></div>
                                         <span class="symbol-latex">{{item.symbol.latex}}</span>
-                                    </span> 
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -152,7 +152,7 @@
                                     <span class="symbol-div">
                                         <div class="math-symbol" :class="item.class" :id="item.id" @click=latexToEquations(item.symbol) v-html="item.symbolHtml"></div>
                                         <span class="symbol-latex">{{item.symbol.latex}}</span>
-                                    </span> 
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -168,14 +168,14 @@
                                 <span class="advanc-symbol-div">
                                     <div class="math-symbol" :id="item.id" @click=latexToEquations(item.equation)>
                                         <img :src="item.imgsrc">
-                                    </div> 
+                                    </div>
                                 </span>
                             </li>
                         </ul>
                     </b-tab>
                 </b-tabs>
             </b-card>
-            
+
             <slot modal-footer>
                 <div class="actions math-footer">
                     <small id="text_hint" v-show="text_hint">Please switch to advanced tab to copy paste LaTeX</small>
@@ -210,7 +210,7 @@
 
 
 <script>
-import json from '../latexEquations.json'   
+import json from '../latexEquations.json'
 import EventBus from '../eventBus';
 import { BModal, BTabs, BTab, BCard, BButton, BSpinner, BRow, BCol, BFormSelect } from 'bootstrap-vue'
 
@@ -284,7 +284,7 @@ export default {
     },
     mounted () {
         MQ = MathQuill.getInterface(2);
-        
+
         this.generateEquationView(json.equations.trig, 'Trig');
         this.generateEquationView(json.equations.supsub, 'Supsub');
         this.generateEquationView(json.equations.root, 'Root');
@@ -296,21 +296,21 @@ export default {
         this.generateSymbolView(json.symbols.arrow, 'Arrow');
         this.generateSymbolView(json.symbols.misc, 'Misc');
         this.generateAdvancedSymbolsView(json.advancedSymbols, 'advancedSymbols');
-        
+
         const that = this
         EventBus.$on('loadDataFromCkEditortoPopup', function(params) {
            that.loadDataFromCkEditortoPopup(params);
         });
     },
     methods: {
-        
+
         loadDataFromCkEditortoPopup(data = '') {
             this.ckTomdlData = data
             this.openModel();
         },
-        
+
         isDisabled() {
-            return ($("#advInput").val() === '') ? true : false; 
+            return ($("#advInput").val() === '') ? true : false;
         },
 
         openModel() {
@@ -384,7 +384,7 @@ export default {
                 mathField.latex('');
                 mathField.write(latexVal);
                 if(mathField.latex() == ''){
-                    $('#advInput').val(latexVal)            
+                    $('#advInput').val(latexVal)
                     this.advanceField = true;
                 }
                 else{
@@ -393,7 +393,7 @@ export default {
             }
             this.activeTab = evt.currentTarget.text;
         },
-        
+
         generateLibraryView(equations, name) {
             let eqDataArray = []
             for (var index = 0; index < equations.length; index++) {
@@ -458,8 +458,8 @@ export default {
                     url = "https://latex.codecogs.com/gif.latex?" + encodeURIComponent(value.latexText);
                 }
                 advancedTabImageArray.push(url);
-            }); 
-            
+            });
+
             var advancedSymbData = [];
             var equation = '';
             for (var index = 0; index < equations.length; index++) {
@@ -468,7 +468,7 @@ export default {
                     equation: equation,
                     id: name+index,
                     imgsrc: advancedTabImageArray[index]
-                })   
+                })
             }
             this.advancedSymbols = advancedSymbData;
         },
@@ -579,7 +579,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-/deep/ {
+::v-deep {
     @import '../assets/main'
 }
 
@@ -658,13 +658,13 @@ export default {
     margin: 0;
     padding: 7px 0;
 }
-.item.math-lib, 
-.math-symbol, 
+.item.math-lib,
+.math-symbol,
 .math-latex-div {
     border: 1px solid transparent;
 }
-.item.math-lib:hover, 
-.math-symbol:hover, 
+.item.math-lib:hover,
+.math-symbol:hover,
 .math-latex-div:hover {
     border: 1px solid rgba(0, 0, 0, .57);
     border-radius: 3px;
@@ -721,7 +721,7 @@ color: rgba(0, 0, 0, .87);
 padding: 0;
 font-size: 1.8em;
 }
- 
+
 
 /* Footer */
 .actions.math-footer {
